@@ -1,5 +1,5 @@
 # Ex.No:1a  			Study of Socket Programming
-
+## Register Number:212225230103 
 ## Aim: 
 To perform a study on Socket Programming
 ## Introduction:
@@ -52,7 +52,61 @@ Socket programming finds applications in various domains, including web developm
 3.	File Transfer Protocol: Protocols like FTP (File Transfer Protocol) utilize socket programming for transferring files between a client and a server.
 4.	Networked Games: Online multiplayer games rely on socket programming to facilitate communication between game clients and servers.
 5.	RPC mechanisms: which allow processes to execute code on a remote server, often use socket programming for communication.
+## Program
 
+### Server:
+```
+server.py
+import socket
+
+# Create socket
+server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+# Bind socket to IP and port
+host = '127.0.0.1'
+port = 12345
+server_socket.bind((host, port))
+
+# Listen for connections
+server_socket.listen(1)
+print("Server is waiting for connection...")
+
+# Accept client connection
+conn, addr = server_socket.accept()
+print("Connected to:", addr)
+
+# Receive data from client
+data = conn.recv(1024).decode()
+print("Client says:", data)
+
+# Send response to client
+message = "Hello Client, message received!"
+conn.send(message.encode())
+
+# Close connection
+conn.close()
+server_socket.close()
+```
+## Client
+```
+client.py
+import socket
+client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+host = '127.0.0.1'
+port = 12345
+client_socket.connect((host, port))
+message = "Hello Server!"
+client_socket.send(message.encode())
+data = client_socket.recv(1024).decode()
+print("Server says:", data)
+client_socket.close()
+```
+
+## Output:
+
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/5e5b4c98-5fe6-41f8-804c-01bec7cae6e1" />
+
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/58f8e437-0f32-445b-8c58-1648596bf7a9" />
 
 ## Result:
 Thus the study of Socket Programming Completed Successfully
